@@ -13,6 +13,11 @@
     margin-top: 40px;
 }
 
+.logo-img{
+    height: 180px;
+    width: 180px;
+    object-fit: cover;
+}
 
 .loginTitle span{
     font-size:35px;
@@ -83,15 +88,23 @@
     border: none;
     background: none;
     margin-bottom: 40px;
-    display:inline-block;
+    display:flex;
+    justify-content: center;
     overflow: hidden;
+}
+.loginContent {
+    font-size: 18px;
+    font-weight: 550;
+    padding: 20px;
+    margin: 0;
 }
 
 .iconSubmit{
     color:white;
     height:35px;
     width:35px;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 1s ease-in-out;
+    
 }
 
 .loginSubmit:hover{

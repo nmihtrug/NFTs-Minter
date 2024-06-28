@@ -7,14 +7,7 @@ export const LoginStyle = styled.div`
     padding: 1rem;
     background: #01091d;
     font-family: 'Quicksand', sans-serif;
-    .BgScrolling {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background-size: 120%;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-    }
+
     .bg-dark-secondary {
         background: #01091d;
     }
@@ -44,6 +37,14 @@ export const LoginStyle = styled.div`
         color: #323232;
         -webkit-text-stroke-width: 0.03em;
         -webkit-text-stroke-color: white;
+    }
+    .m-l-r-50 {
+    margin-left: 50px;
+    margin-right: 50px;
+    }
+
+    .p-50{
+        padding: 50px;
     }
 
     .si-1 {
