@@ -1,7 +1,7 @@
 import replicate
 import os
 
-os.environ["REPLICATE_API_TOKEN"] = 'r8_HACwu6uvphc0ARNU1HDkw5CqJXW4mME2MYkoX' # Yout APT token
+os.environ["REPLICATE_API_TOKEN"] = 'Your_API_token'
 # https://replicate.com/        <--  Test it hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
 output = replicate.run(
