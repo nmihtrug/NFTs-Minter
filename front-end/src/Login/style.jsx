@@ -5,17 +5,17 @@ export const LoginStyle = styled.div`
     min-height: 100vh;
     display: flex;
     padding: 1rem;
-    background: #01091d;
+    background: #0F1011;
     font-family: 'Quicksand', sans-serif;
 
     .bg-dark-secondary {
-        background: #01091d;
+        background: #0F1011;
     }
     .bc-primary {
         border: 0.3em solid #0c79ff;
     }
     .box-shadow-primary {
-        box-shadow: 10px 29px 100px -14px #0c79ff;
+        box-shadow: 0.1px 15px 120px -30px #0c79ff;
     }
     .color-primary {
         color: #00e7aa;
