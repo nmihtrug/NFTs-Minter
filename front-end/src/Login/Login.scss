@@ -1,0 +1,112 @@
+.unValid{
+    color: black;
+    position:absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 5px;
+    height: 25px;
+    width: 25px;
+}
+
+.logoLogin{
+    margin-top: 40px;
+}
+
+.logo-img{
+    height: 180px;
+    width: 180px;
+    object-fit: cover;
+}
+
+.loginTitle span{
+    font-size:35px;
+    font-weight: 900;
+    text-shadow: 0px 0px 2px black, 0 0px 25px #0c79ff, 0 0 35px #2aa96e;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.loginTitle {
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+
+.inputWithIcon{
+  position: relative;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+
+.inputIcon {
+    color:black;
+    position:absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 5px;
+    height: 25px;
+    width: 25px;
+}
+
+.inputWithIcon input {
+    padding-left: 40px;
+    border-width:0px;
+    border-radius: 5px;
+    height: 50px;
+    width: 330px;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: white;
+    color: black;
+}
+
+.inputWithIcon input:focus{
+    border-radius: 3px;
+    box-shadow: 4px 3px 15px 1px #0c79ff ;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    color:black;
+}
+
+
+
+.inputUnValid input {
+    border-radius: 3px;
+    box-shadow: 4px 3px 15px 1px rgb(240, 68, 68);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.loginSubmit{
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-bottom: 40px;
+    display:flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.loginContent {
+    font-size: 18px;
+    font-weight: 550;
+    padding: 20px;
+    margin: 0;
+}
+
+.iconSubmit{
+    color:white;
+    height:35px;
+    width:35px;
+    transition: transform 1s ease-in-out;
+    
+}
+
+.loginSubmit:hover{
+    transform: scale(1.2);
+}

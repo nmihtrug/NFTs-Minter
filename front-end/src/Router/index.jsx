@@ -1,17 +1,22 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import App from '../App';
+import Login from '../Login/index';
+import Navbar from '../components/NavBar';
+import Create from '../pages/createPage';
 
-const RouterComponent = () => {
-    const router = createBrowserRouter([
-      {
-        path: "/",
-        element: <div>Hello world!</div>,
-      },
-    ]);
-    return <RouterProvider router={router} />
-}
+const AppRouter = () => {
+    return (
+        <Router>
+            <Navbar />
+            <Routes>
+                <Route path="/create-nft" element={<Create />} />
+                <Route path="/login" element={<Login />} />
+            </Routes>
+        </Router>
+    );
+};
 
-export default RouterComponent;
+export default AppRouter;
+
+
