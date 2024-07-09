@@ -18,6 +18,7 @@ video {
 }
 body {
     min-height: 100vh;
+    background-color: #0F1011 !important;
 }
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -26,7 +27,7 @@ body {
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: #0F1011;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
