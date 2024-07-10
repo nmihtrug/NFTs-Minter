@@ -1,4 +1,5 @@
 import json
+import subprocess
 import time
 
 from django.shortcuts import render
@@ -36,31 +37,57 @@ class AIGenerative(APIView):
         try:
             prompt = request.data.get('prompt')
             serialized_transaction = request.data.get('transaction')
-            time.sleep(6)
-            confirm = confirmTransaction(serialized_transaction, int(float(os.getenv("FEE_GENERATIVE_IMAGE_SOL"))*float(1000000000)))
+            # time.sleep(6)
+            confirm = confirmTransaction(serialized_transaction,
+                                         int(float(os.getenv("FEE_GENERATIVE_IMAGE_SOL")) * float(1000000000)))
             print(confirm)
             if not confirm['success']:
                 return Response({'success': False}, status=200)
 
-            os.environ["REPLICATE_API_TOKEN"] = 'r8_Ut5nXCUcxVayHHqWIFyu8DpCweVj0g52Xg1PE'
+            os.environ["REPLICATE_API_TOKEN"] = os.getenv("REPLICATE_API_TOKEN")
 
             output = replicate.run(
-                "bytedance/sdxl-lightning-4step:5f24084160c9089501c1b3545d9be3c27883ae2239b6f412990e82d4a6210f8f",
+                "stability-ai/stable-diffusion-3",
                 input={
-                    "width": 1024,
-                    "height": 1024,
-                    "prompt": prompt,
-                    "scheduler": "K_EULER",
-                    "num_outputs": 1,
-                    "guidance_scale": 0,
-                    "negative_prompt": "worst quality, low quality",
-                    "num_inference_steps": 4
+                    "cfg": request.data.get('cfg'),
+                    "steps": request.data.get('steps'),
+                    "prompt": request.data.get('prompt'),
+                    "output_quality": request.data.get('outputQuality'),
+                    "negative_prompt": request.data.get('negativePrompt'),
+                    "prompt_strength": request.data.get('promptStrength')
                 }
             )
             return Response({'success': True, 'url': output[0]}, status=200)
         except Exception as e:
             print(e)
             return Response({'success': False, 'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class NFTManage(APIView):
+    def post(self, request):
+
+        serialized_transaction = request.data.get('transaction')
+        time.sleep(6)
+        confirm = confirmTransaction(serialized_transaction,
+                                     int(float(os.getenv("FEE_CREATE_NFT_SOL")) * float(1000000000)))
+        print(confirm)
+        if not confirm['success']:
+            return Response({'success': False}, status=200)
+
+        script_path = "/home/hknight/PycharmProjects/nft-solana-project/create_nft/img_base64.txt"
+        with open(script_path, "w") as script_file:
+            script_file.write(request.data.get('image'))
+        # Run the npm command
+        directory = "/home/hknight/PycharmProjects/nft-solana-project/create_nft/"
+        command = ["npm", "run", "execute", "create_nft.ts", "--", str(request.data.get('name')), str(request.data.get('symbol')), str(request.data.get('description')),
+                   str(request.data.get('address')), str(request.data.get('royalty'))]
+        os.chdir(directory)
+        result = subprocess.run(command, capture_output=True, text=True)
+        print(result)
+        if '{"status":1}' in result.stdout:
+            return Response({'success': True}, status=200)
+        else:
+            return Response({'success': False}, status=200)
 
 
 def confirmTransaction(serialized_transaction, expected_amount):
@@ -82,7 +109,19 @@ def confirmTransaction(serialized_transaction, expected_amount):
 
     # Send and confirm the transaction
     client = Client("https://api.devnet.solana.com")
-    response = json.loads(client.send_raw_transaction(transaction.serialize()).to_json())
+
+    retries = 0
+    max_retries = 20  # Set a maximum number of retries
+    response = {}
+    while retries < max_retries:
+        try:
+            response = json.loads(client.send_raw_transaction(transaction.serialize()).to_json())
+            break
+        except Exception as e:
+            print(f'Transaction failed: {e}')
+            retries += 1
+            time.sleep(1)  # Sleep for the retry interval before retrying
+
     signature = response['result']
     print(signature)
     # Confirm the transaction
